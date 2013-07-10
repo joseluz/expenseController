@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="ExpenseController.UI.AddExpenseFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ExpenseController.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+
+        <Popup Name="addExpensePopUp" IsLightDismissEnabled="True" HorizontalOffset="500">
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <PaneThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Border x:Name="popupBorder" Width="500" BorderThickness="2" BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Simple Popup" FontSize="24.667" HorizontalAlignment="Center" />
+                    <Button Content="Close" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Popup>
+
+    </Grid>
+</Page>

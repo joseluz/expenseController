@@ -2,8 +2,7 @@
     x:Class="ExpenseController.UI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ExpenseController.UI"
-    xmlns:localData="using:ExpenseController.UI.Data">
+    xmlns:local="using:ExpenseController.UI">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -16,9 +15,6 @@
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Application-specific resources -->
-
-            <x:String x:Key="AppName">ExpenseController.UI</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

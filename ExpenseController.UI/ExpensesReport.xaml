@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="ExpenseController.UI.ExpensesReport"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:datavis="using:WinRTXamlToolkit.Controls.DataVisualization"    
+    xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting" 
+    xmlns:Series="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    mc:Ignorable="d">
+
+    <Grid Background="LightYellow">
+
+        <Grid x:Name="Parent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0">
+                <ScrollViewer x:Name="scrollViewer" Width="500" Height="270"
+                      HorizontalAlignment="Left" VerticalAlignment="Top"
+                      VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollMode="Disabled" HorizontalScrollMode="Auto"
+                      ZoomMode="Disabled">
+                    <StackPanel Orientation="Horizontal">
+                        <charting:Chart
+                            x:Name="PieChart" 
+                            Title="Pie Chart"
+                            Margin="70,0"
+                            Foreground="Black"
+                            FontWeight="Bold">
+                            <charting:Chart.Series>
+                                <Series:PieSeries 
+                                    Title="Legenda"
+                                    ItemsSource="{Binding}" 
+                                    IndependentValueBinding="{Binding Name}" 
+                                    DependentValueBinding="{Binding Value}" 
+                                    IsSelectionEnabled="False"
+                                    FontWeight="Bold"/>
+                            </charting:Chart.Series>
+                        </charting:Chart>
+                        
+                        <charting:Chart 
+                                x:Name="BarChart" 
+                                Title="Bar Chart"
+                                Margin="70,0" 
+                                Foreground="Black"
+                                FontWeight="Bold">
+                            <charting:Chart.Series>
+                                <Series:BarSeries 
+                                    ItemsSource="{Binding}" 
+                                    IndependentValueBinding="{Binding Name}" 
+                                    DependentValueBinding="{Binding Value}" 
+                                    IsSelectionEnabled="False" />
+                            </charting:Chart.Series>
+                        </charting:Chart>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

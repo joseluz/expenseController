@@ -17,41 +17,55 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0">
-                <ScrollViewer x:Name="scrollViewer" Width="500" Height="270"
+                <ScrollViewer x:Name="scrollViewer"
                       HorizontalAlignment="Left" VerticalAlignment="Top"
                       VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
                     VerticalScrollMode="Disabled" HorizontalScrollMode="Auto"
                       ZoomMode="Disabled">
                     <StackPanel Orientation="Horizontal">
+                        <charting:Chart x:Name="BarChart" Margin="70,0" Foreground="Black" FontWeight="Bold" Width="1300" Height="900">
+                            <charting:Chart.Title>
+                                <TextBlock Text="Bar Chart" FontSize="20" FontWeight="Bold" TextAlignment="Center" FontStyle="Italic" />
+                            </charting:Chart.Title>
+                            <charting:Chart.Series>
+                                <Series:BarSeries ItemsSource="{Binding}" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}" 
+                                    IsSelectionEnabled="False" />
+                            </charting:Chart.Series>
+                        </charting:Chart>
+                        <Grid Width="1300"
+                          Height="900">
+                            <TextBlock Text="Latest Expenses" FontSize="20" Margin="0,100" FontWeight="Bold" Foreground="Black" VerticalAlignment="Top" TextAlignment="Center" FontStyle="Italic"></TextBlock>
+                            <Grid Background="BurlyWood" Width="350" VerticalAlignment="Center">
+                                <GridView
+                                        Name="ExpensesListView"
+                                        HorizontalAlignment="Center"
+                                        HorizontalContentAlignment="Right"
+                                        Height="550"
+                                        ItemsSource="{Binding Name}"
+                                        Foreground="Black"
+                                        SelectionMode="None">
+                                </GridView>
+                            </Grid>
+                        </Grid>
+
                         <charting:Chart
-                            x:Name="PieChart" 
-                            Title="Pie Chart"
-                            Margin="70,0"
-                            Foreground="Black"
-                            FontWeight="Bold">
+                                x:Name="PieChart" 
+                                Margin="70,0"
+                                Foreground="Black"
+                                FontWeight="Bold" 
+                                Width="1300"
+                                Height="900">
+                            <charting:Chart.Title>
+                                <TextBlock Text="Pie Chart" FontSize="20" FontWeight="Bold" TextAlignment="Center" FontStyle="Italic" />
+                            </charting:Chart.Title>
                             <charting:Chart.Series>
                                 <Series:PieSeries 
                                     Title="Legenda"
-                                    ItemsSource="{Binding}" 
+                                    ItemsSource="{Binding}"
                                     IndependentValueBinding="{Binding Name}" 
                                     DependentValueBinding="{Binding Value}" 
                                     IsSelectionEnabled="False"
                                     FontWeight="Bold"/>
-                            </charting:Chart.Series>
-                        </charting:Chart>
-                        
-                        <charting:Chart 
-                                x:Name="BarChart" 
-                                Title="Bar Chart"
-                                Margin="70,0" 
-                                Foreground="Black"
-                                FontWeight="Bold">
-                            <charting:Chart.Series>
-                                <Series:BarSeries 
-                                    ItemsSource="{Binding}" 
-                                    IndependentValueBinding="{Binding Name}" 
-                                    DependentValueBinding="{Binding Value}" 
-                                    IsSelectionEnabled="False" />
                             </charting:Chart.Series>
                         </charting:Chart>
                     </StackPanel>

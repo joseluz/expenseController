@@ -23,5 +23,12 @@ namespace ExpenseController.UI.ViewData
             get { return _value; }
             set { _value = value; }
         }
+
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set { _date = value; }
+        }
     }
 }

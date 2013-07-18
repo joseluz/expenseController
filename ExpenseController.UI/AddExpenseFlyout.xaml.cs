@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ExpenseController.UI.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -21,6 +22,7 @@ namespace ExpenseController.UI
     /// </summary>
     public sealed partial class AddExpenseFlyout : Page
     {
+
         public AddExpenseFlyout()
         {
             this.InitializeComponent();
@@ -34,5 +36,27 @@ namespace ExpenseController.UI
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        public void Open()
+        {
+            BindCategoryList();
+
+            addExpensePopUp.HorizontalOffset = Window.Current.Bounds.Width - popupBorder.Width + 5;
+            popupBorder.Height = Window.Current.Bounds.Height + 10;
+            addExpensePopUp.IsOpen = true;
+        }
+
+        public void BindCategoryList()
+        {
+            var categories = new List<ExpenseCategory>();
+            categories.Add(new ExpenseCategory() { Id = 1, Name = "Transporte", });
+            categories.Add(new ExpenseCategory() { Id = 2, Name = "Farmacia" });
+            categories.Add(new ExpenseCategory() { Id = 3, Name = "Almoco" });
+            categories.Add(new ExpenseCategory() { Id = 4, Name = "Mercado" });
+            categories.Add(new ExpenseCategory() { Id = 5, Name = "Feira" });
+            categories.Add(new ExpenseCategory() { Id = 6, Name = "Café" });
+            categoriesListView.ItemsSource = categories;
+        }
     }
+
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace ExpenseController.UI.Model
 {
@@ -14,5 +15,6 @@ namespace ExpenseController.UI.Model
 
         public string Name { get; set; }
         public Color Color { get; set; }
+        public ImageSource Image { get; set; }
     }
 }

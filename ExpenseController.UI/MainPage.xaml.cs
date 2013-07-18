@@ -34,5 +34,10 @@ namespace ExpenseController.UI
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new AddExpenseFlyout().Open();
+        }
     }
 }

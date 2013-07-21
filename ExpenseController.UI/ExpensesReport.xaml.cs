@@ -25,13 +25,8 @@ namespace ExpenseController.UI
     /// 
     public sealed partial class ExpensesReport : Page
     {
-
-
         ObservableCollection<ExpenseViewData> CategoryExpenseCollection = new ObservableCollection<ExpenseViewData>();
-
         ObservableCollection<ExpenseViewData> ExpenseCollection = new ObservableCollection<ExpenseViewData>();
-
-        string CurrencySymbol = "$"; // add to ViewData if needed
 
         public ExpensesReport()
         {
@@ -216,7 +211,7 @@ namespace ExpenseController.UI
 
             ((PieSeries)this.PieChart.Series[0]).ItemsSource = CategoryExpenseCollection;
 
-            ExpensesListView.ItemsSource = ExpenseCollection.OrderBy(e => e.Date).Take(10).Select(e => e.Date + ": " + e.Value + CurrencySymbol + " " + e.Name);
+            ExpensesListView.ItemsSource = ExpenseCollection.OrderBy(e => e.Date).Take(10);
         }
 
         /// <summary>

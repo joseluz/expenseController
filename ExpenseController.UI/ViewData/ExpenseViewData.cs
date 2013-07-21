@@ -9,26 +9,15 @@ namespace ExpenseController.UI.ViewData
 {
     public class ExpenseViewData
     {
+        private const string CurrencySymbol = "$";
 
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
+        public double Value { get; set; }
+        public DateTime Date { get; set; }
 
-        private double _value;
-        public double Value
+        public override string ToString()
         {
-            get { return _value; }
-            set { _value = value; }
-        }
-
-        private DateTime _date;
-        public DateTime Date
-        {
-            get { return _date; }
-            set { _date = value; }
+            return string.Format("{0:d} {1}{2:n2} {3}", Date, CurrencySymbol, Value, Name);
         }
     }
 }

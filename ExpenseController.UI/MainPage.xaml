@@ -10,21 +10,21 @@
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="250" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Frame x:Name="BasicLayoutFrame" Grid.Row="0">
-                <Grid x:Name="BasicFrameGrid">
+                <Grid x:Name="BasicFrameGrid" Height="100">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="250" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Expense Report" Style="{StaticResource PageHeaderTextStyle}" Margin="50,0,0,162"/>
-                    <Button Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,55,67,0" Click="Button_Click"/>
+                    <TextBlock Grid.Column="0" Text="Expense Report" Style="{StaticResource PageHeaderTextStyle}" Margin="69,0,0,0" Grid.ColumnSpan="1"/>
+                    <Button Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,44,29,0" Click="Button_Click"/>
                 </Grid>
             </Frame>
             <Frame x:Name="SpecificLayoutFrame" Grid.Row="1" />

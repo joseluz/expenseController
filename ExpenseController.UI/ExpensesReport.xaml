@@ -9,7 +9,7 @@
     xmlns:Series="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     mc:Ignorable="d">
 
-    <Grid Background="LightYellow">
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
 
         <Grid x:Name="Parent">
             <Grid.RowDefinitions>

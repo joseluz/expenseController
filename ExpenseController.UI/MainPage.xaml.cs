@@ -33,6 +33,7 @@ namespace ExpenseController.UI
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.SpecificLayoutFrame.Navigate(typeof(ExpensesReport));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

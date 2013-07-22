@@ -27,7 +27,7 @@
                     <Button Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,44,29,0" Click="Button_Click"/>
                 </Grid>
             </Frame>
-            <Frame x:Name="SpecificLayoutFrame" Grid.Row="1" />
+            <Frame x:Name="SpecificLayoutFrame" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
         </Grid>
     </Grid>
 </Page>

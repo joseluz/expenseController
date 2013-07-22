@@ -9,73 +9,76 @@
     xmlns:Series="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Key="ExpenseDataTemplate">
+            <Border BorderBrush="Black" BorderThickness="1" Padding="5,5,5,5">
+                <Grid Width="auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Date}" TextAlignment="Center" Width="auto" Grid.Column="0" />
+                    <TextBlock Text="{Binding Category}" TextAlignment="Center" Width="auto" Grid.Column="1" />
+                    <TextBlock Text="{Binding Description}" TextAlignment="Center" Width="auto" Grid.Column="2" />
+                    <TextBlock Text="{Binding Value}" TextAlignment="Center" Width="auto" Grid.Column="3" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer x:Name="scrollViewer"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
+            VerticalScrollMode="Disabled" HorizontalScrollMode="Auto"
+            ZoomMode="Disabled">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Black" BorderThickness="1" Padding="5,5,5,5">
+                    <ListView
+                        Name="ExpensesListView"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Margin="5,0"
+                        Padding="5,5,5,5"
+                        Width="Auto"
+                        Height="Auto"
+                        Foreground="Black"
+                        SelectionMode="None"
+                        ItemTemplate="{StaticResource ExpenseDataTemplate}" />
+                </Border>
 
-        <Grid x:Name="Parent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0">
-                <ScrollViewer x:Name="scrollViewer"
-                      HorizontalAlignment="Left" VerticalAlignment="Top"
-                      VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
-                    VerticalScrollMode="Disabled" HorizontalScrollMode="Auto"
-                      ZoomMode="Disabled">
-                    <StackPanel Orientation="Horizontal">
-                        <charting:Chart x:Name="BarChart" Margin="70,0" Foreground="Black" FontWeight="Bold" Width="1300" Height="900">
-                            <charting:Chart.LegendStyle>
-                                <Style TargetType="datavis:Legend">
-                                    <Setter Property="Width" Value="0" />
-                                </Style>
-                            </charting:Chart.LegendStyle>
-                            <charting:Chart.Title>
-                                <TextBlock Text="Bar Chart" FontSize="20" FontWeight="Bold" TextAlignment="Center" FontStyle="Italic" />
-                            </charting:Chart.Title>
-                            <charting:Chart.Series>
-                                <Series:BarSeries ItemsSource="{Binding}" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}" 
-                                    IsSelectionEnabled="False" />
-                            </charting:Chart.Series>
-                        </charting:Chart>
-                        <Grid Width="1300"
-                          Height="900">
-                            <TextBlock Text="Latest Expenses" FontSize="20" Margin="0,100" FontWeight="Bold" Foreground="Black" VerticalAlignment="Top" TextAlignment="Center" FontStyle="Italic"></TextBlock>
-                            <Grid Background="BurlyWood" Width="350" VerticalAlignment="Center">
-                                <GridView
-                                        Name="ExpensesListView"
-                                        HorizontalAlignment="Center"
-                                        HorizontalContentAlignment="Right"
-                                        Height="550"
-                                        ItemsSource="{Binding Name}"
-                                        Foreground="Black"
-                                        SelectionMode="None">
-                                </GridView>
-                            </Grid>
-                        </Grid>
+                <charting:Chart x:Name="BarChart" Margin="70,0" Foreground="Black" FontWeight="Bold" Width="1300" Height="900">
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="datavis:Legend">
+                            <Setter Property="Width" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+                    <charting:Chart.Series>
+                        <Series:BarSeries 
+                            IndependentValueBinding="{Binding Name, Mode=OneTime}" 
+                            DependentValueBinding="{Binding Value, Mode=OneTime}" 
+                            IsSelectionEnabled="False" />
+                    </charting:Chart.Series>
+                </charting:Chart>
 
-                        <charting:Chart
-                                x:Name="PieChart" 
-                                Margin="70,0"
-                                Foreground="Black"
-                                FontWeight="Bold" 
-                                Width="1300"
-                                Height="900">
-                            <charting:Chart.Title>
-                                <TextBlock Text="Pie Chart" FontSize="20" FontWeight="Bold" TextAlignment="Center" FontStyle="Italic" />
-                            </charting:Chart.Title>
-                            <charting:Chart.Series>
-                                <Series:PieSeries 
-                                    Title="Legenda"
-                                    ItemsSource="{Binding}"
-                                    IndependentValueBinding="{Binding Name}" 
-                                    DependentValueBinding="{Binding Value}" 
-                                    IsSelectionEnabled="False"
-                                    FontWeight="Bold"/>
-                            </charting:Chart.Series>
-                        </charting:Chart>
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>
-        </Grid>
+                <charting:Chart
+                        x:Name="PieChart" 
+                        Margin="70,0"
+                        Foreground="Black"
+                        FontWeight="Bold" 
+                        Width="1300"
+                        Height="900">
+                    <charting:Chart.Series>
+                        <Series:PieSeries 
+                            IndependentValueBinding="{Binding Name, Mode=OneTime}" 
+                            DependentValueBinding="{Binding Value, Mode=OneTime}" 
+                            IsSelectionEnabled="False"
+                            FontWeight="Bold"/>
+                    </charting:Chart.Series>
+                </charting:Chart>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

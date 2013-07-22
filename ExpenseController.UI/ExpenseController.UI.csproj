@@ -117,6 +117,7 @@
     <Compile Include="Model\Expense.cs" />
     <Compile Include="Model\ExpenseCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewData\CategoryExpenseViewData.cs" />
     <Compile Include="ViewData\ExpenseViewData.cs" />
   </ItemGroup>
   <ItemGroup>

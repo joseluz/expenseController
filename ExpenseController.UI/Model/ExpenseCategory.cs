@@ -16,5 +16,16 @@ namespace ExpenseController.UI.Model
         public string Name { get; set; }
         public Color Color { get; set; }
         public ImageSource Image { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as ExpenseCategory;
+            return other != null && other.Id == Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

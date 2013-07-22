@@ -1,4 +1,5 @@
-﻿using ExpenseController.UI.ViewData;
+﻿using ExpenseController.UI.Model;
+using ExpenseController.UI.ViewData;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,193 +27,33 @@ namespace ExpenseController.UI
     /// 
     public sealed partial class ExpensesReport : Page
     {
-        ObservableCollection<ExpenseViewData> CategoryExpenseCollection = new ObservableCollection<ExpenseViewData>();
+        ObservableCollection<CategoryExpenseViewData> CategoryExpenseCollection = new ObservableCollection<CategoryExpenseViewData>();
         ObservableCollection<ExpenseViewData> ExpenseCollection = new ObservableCollection<ExpenseViewData>();
 
         public ExpensesReport()
         {
             this.InitializeComponent();
 
-            #region CategoryExpenses
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
+            var categories = new[]
             {
-                Name = "Comida",
-                Value = 100,
-                Date = DateTime.Today.AddDays(1)
-            });
+                new ExpenseCategory() { Id = 1, Name = "Comida", Color = Color.FromArgb(255, 255, 0, 0) },
+                new ExpenseCategory() { Id = 2, Name = "Farmácia", Color = Color.FromArgb(255, 0, 255, 0) },
+                new ExpenseCategory() { Id = 3, Name = "Entretenimento", Color = Color.FromArgb(255, 0, 0, 255) },
+                new ExpenseCategory() { Id = 4, Name = "Outros", Color = Color.FromArgb(255, 255, 255, 0) },
+            };
+            var expenses = Enumerable.Range(0, 20).Select(i => new Expense() { Id = i + 1, Category = categories[i % categories.Length], Date = DateTime.Today.AddDays(-i), Value = i * 100, Description = "Description " + i });
 
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Cinema",
-                Value = 200,
-                Date = DateTime.Today.AddDays(2)
-            });
+            var expensesViewDatas = expenses.Select(e => new ExpenseViewData(e)).ToArray();
+            var categoryViewDatas = expenses.GroupBy(e => e.Category).Select(g => new CategoryExpenseViewData(g.Key.Name, g.Sum(e => e.Value))).ToArray();
 
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Brinquedos",
-                Value = 300,
-                Date = DateTime.Today.AddDays(3)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Roupas",
-                Value = 150,
-                Date = DateTime.Today.AddDays(4)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Água",
-                Value = 500,
-                Date = DateTime.Today.AddDays(5)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Carro",
-                Value = 600,
-                Date = DateTime.Today.AddDays(6)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Luz",
-                Value = 700,
-                Date = DateTime.Today.AddDays(5)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Supermercado",
-                Value = 800,
-                Date = DateTime.Today.AddDays(1)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Presentes",
-                Value = 900,
-                Date = DateTime.Today.AddDays(-1)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Telephone",
-                Value = 1000,
-                Date = DateTime.Today.AddDays(-2)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Escola",
-                Value = 100,
-                Date = DateTime.Today.AddDays(11)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Internet",
-                Value = 100,
-                Date = DateTime.Today.AddDays(2)
-            });
-
-            CategoryExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Outros",
-                Value = 100,
-                Date = DateTime.Today.AddDays(3)
-            });
-            #endregion
-
-            #region Expenses
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Coca-Cola",
-                Value = 1.60,
-                Date = DateTime.Today.AddDays(-1)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Pepsi",
-                Value = 1.20,
-                Date = DateTime.Today.AddDays(-1)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Chocolate",
-                Value = 1.20,
-                Date = DateTime.Today.AddDays(-5)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Sorvete",
-                Value = 3.20,
-                Date = DateTime.Today.AddDays(0)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Almoço",
-                Value = 15.60,
-                Date = DateTime.Today.AddDays(-3)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Jantar",
-                Value = 12.20,
-                Date = DateTime.Today.AddDays(-3)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Supermercado",
-                Value = 250.20,
-                Date = DateTime.Today.AddDays(0)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Mouse",
-                Value = 17.30,
-                Date = DateTime.Today.AddDays(0)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Material Escolar",
-                Value = 150.89,
-                Date = DateTime.Today.AddDays(-20)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Livros",
-                Value = 42,
-                Date = DateTime.Today.AddDays(0)
-            });
-
-            ExpenseCollection.Add(new ExpenseViewData
-            {
-                Name = "Celular",
-                Value = 70.26,
-                Date = DateTime.Today.AddDays(1)
-            });
-
-            #endregion
+            foreach (var expenseViewData in expensesViewDatas)
+                ExpenseCollection.Add(expenseViewData);
+            foreach (var categoryViewData in categoryViewDatas)
+                CategoryExpenseCollection.Add(categoryViewData);
 
             ((BarSeries)this.BarChart.Series[0]).ItemsSource = CategoryExpenseCollection;
-
             ((PieSeries)this.PieChart.Series[0]).ItemsSource = CategoryExpenseCollection;
-
-            ExpensesListView.ItemsSource = ExpenseCollection.OrderBy(e => e.Date).Take(10);
+            ExpensesListView.ItemsSource = ExpenseCollection.OrderBy(e => e.Wrapped.Date).ToArray();
         }
 
         /// <summary>

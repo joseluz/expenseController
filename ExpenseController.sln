@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows 8
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseController.UI", "ExpenseController.UI\ExpenseController.UI.csproj", "{BC6A2354-A74E-4F4B-89F1-7F429B289376}"
 EndProject
 Global

@@ -24,7 +24,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Expense Report" Style="{StaticResource PageHeaderTextStyle}" Margin="69,0,0,0" Grid.ColumnSpan="1"/>
-                    <Button Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,44,29,0" Click="Button_Click"/>
+                    <Button Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,30,25,-5" Click="Button_Click" Height="53" Width="66" FontSize="24" FontWeight="Normal"/>
                 </Grid>
             </Frame>
             <Frame x:Name="SpecificLayoutFrame" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />

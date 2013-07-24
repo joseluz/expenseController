@@ -42,7 +42,7 @@ namespace ExpenseController.UI
             this.SpecificLayoutFrame.Navigate(typeof(ExpensesReport));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddExpenseButton_Click(object sender, RoutedEventArgs e)
         {
             new InsertExpenseFlyout().Open();
         }

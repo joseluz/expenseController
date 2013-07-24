@@ -7,6 +7,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style x:Key="AddExpenseButtonStyle" TargetType="Button" BasedOn="{StaticResource AppBarButtonStyle}">
+            <Setter Property="AutomationProperties.AutomationId" Value="AddAppBarButton"/>
+            <Setter Property="AutomationProperties.Name" Value="Add Expense"/>
+            <Setter Property="Content" Value="&#xE109;"/>
+        </Style>
+    </Page.Resources>
+    
+    <Page.BottomAppBar>
+        <AppBar x:Name="AppBar" Padding="10,0,10,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
+                    <Button x:Name="AddExpenseButton" Style="{StaticResource AddExpenseButtonStyle}" Tag="Edit" Click="AddExpenseButton_Click" />
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
+    
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid>
             <Grid.RowDefinitions>
@@ -24,7 +46,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Expense Report" Style="{StaticResource PageHeaderTextStyle}" Margin="69,0,0,0" Grid.ColumnSpan="1"/>
-                    <Button Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,30,25,-5" Click="Button_Click" Height="53" Width="66" FontSize="24" FontWeight="Normal"/>
+                    <Button Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,30,25,-5" Click="AddExpenseButton_Click" Height="53" Width="66" FontSize="24" FontWeight="Normal"/>
                 </Grid>
             </Frame>
             <Frame x:Name="SpecificLayoutFrame" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />

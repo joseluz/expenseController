@@ -46,7 +46,7 @@
                         </ListView>
                         <TextBox Name="expenseDatePicker" FontSize="25" Width="400" Grid.Row="2"/>
                         <Button Name="saveExpenseButton" Content="Add" Style="{StaticResource SaveButtonStyle}" Grid.Row="3" Click="saveExpenseButton_Click" />
-                        <TextBox Name="descriptionTextBox" Grid.Row="4" Margin="0,15,0,0" Text="Description" Foreground="LightGray" GotFocus="descriptionTextBox_GotFocus" LostFocus="descriptionTextBox_LostFocus" />
+                        <TextBox Name="descriptionTextBox" Grid.Row="4" Margin="0,15,0,0" Width="420" Text="Description" Foreground="LightGray" GotFocus="descriptionTextBox_GotFocus" LostFocus="descriptionTextBox_LostFocus" />
                     </Grid>
                 </Grid>
             </Border>

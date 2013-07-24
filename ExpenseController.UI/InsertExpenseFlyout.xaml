@@ -32,24 +32,24 @@
                         <TextBlock x:Name="pageTitle" Text="Add Expense" Style="{StaticResource PageHeaderTextStyle}" Foreground="White"  Grid.Column="1" IsHitTestVisible="false"/>
                     </Grid>
 
-                    <Grid Grid.Row="1" Margin="0,80,0,0">
+                    <Grid Grid.Row="1" Margin="0,40,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40" />
-                            <RowDefinition Height="450" />
+                            <RowDefinition Height="480" />
                             <RowDefinition Height="40" />
                             <RowDefinition Height="40" />
+                            <RowDefinition Height="100" />
                         </Grid.RowDefinitions>
                         <TextBox x:Name="valueTextBox" FontSize="25" Width="400" Grid.Row="0"/>
                         <ListView x:Name="categoriesListView" Grid.Row="1" Margin="0,10,0,10"
                                   ItemTemplate="{StaticResource CategoryTemplate}">
-
                         </ListView>
+                        <TextBox Name="expenseDatePicker" FontSize="25" Width="400" Grid.Row="2"/>
+                        <Button Name="saveExpenseButton" Content="Add" Style="{StaticResource SaveButtonStyle}" Grid.Row="3" Click="saveExpenseButton_Click" />
+                        <TextBox Name="descriptionTextBox" Grid.Row="4" Margin="0,15,0,0" Text="Description" Foreground="LightGray" GotFocus="descriptionTextBox_GotFocus" LostFocus="descriptionTextBox_LostFocus" />
                     </Grid>
-
                 </Grid>
-
             </Border>
         </Popup>
-
     </Grid>
 </Page>

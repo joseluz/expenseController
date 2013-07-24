@@ -1,10 +1,12 @@
-﻿using ExpenseController.UI.Model;
+﻿using ExpenseController.UI.DAO;
+using ExpenseController.UI.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,9 +25,12 @@ namespace ExpenseController.UI
     /// </summary>
     public sealed partial class InsertExpenseFlyout : Page
     {
+        private BaseDAO<Expense> expenseDao;
+
         public InsertExpenseFlyout()
         {
             this.InitializeComponent();
+            expenseDao = new BaseDAO<Expense>();
         }
 
         /// <summary>
@@ -35,6 +40,7 @@ namespace ExpenseController.UI
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
         }
 
         public void Open()
@@ -42,13 +48,15 @@ namespace ExpenseController.UI
             if (!addExpensePopUp.IsOpen)
             {
                 BindCategoryList();
-                //addExpensePopUp.HorizontalOffset = Window.Current.Bounds.Width - popupBorder.Width + 5;
                 popupBorder.Height = Window.Current.Bounds.Height + 10;
                 addExpensePopUp.IsOpen = true;
 
                 Canvas.SetLeft(addExpensePopUp, Window.Current.Bounds.Width - popupBorder.Width + 5);
 
-                Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+                valueTextBox.Text = "0,00";
+                expenseDatePicker.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+                //Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
                 Window.Current.Activated += OnWindowActivated;
             }
         }
@@ -63,13 +71,14 @@ namespace ExpenseController.UI
         {
             var baseUri = new Uri("ms-appx:///");
             var categories = new List<ExpenseCategory>();
-            categories.Add(new ExpenseCategory() { Id = 1, Name = "Transporte", Image = new BitmapImage(new Uri(baseUri, "Images/bus-48.png")), });
-            categories.Add(new ExpenseCategory() { Id = 2, Name = "Farmacia", Image = new BitmapImage(new Uri(baseUri, "Images/apartment-48.png")) });
-            categories.Add(new ExpenseCategory() { Id = 3, Name = "Almoco" });
-            categories.Add(new ExpenseCategory() { Id = 4, Name = "Mercado" });
-            categories.Add(new ExpenseCategory() { Id = 5, Name = "Feira" });
-            categories.Add(new ExpenseCategory() { Id = 6, Name = "Moradia", Image = new BitmapImage(new Uri(baseUri, "Images/log_cabin-48.png")) });
+            categories.Add(new ExpenseCategory() { Id = 1, Name = "Transporte", Image = new BitmapImage(new Uri(baseUri, "Images/bus-48.png")), BackColor = new SolidColorBrush(Colors.LightGreen), });
+            categories.Add(new ExpenseCategory() { Id = 2, Name = "Farmacia", Image = new BitmapImage(new Uri(baseUri, "Images/apartment-48.png")), BackColor = new SolidColorBrush(Colors.LightYellow), });
+            categories.Add(new ExpenseCategory() { Id = 3, Name = "Almoco", BackColor = new SolidColorBrush(Colors.LightSteelBlue), });
+            categories.Add(new ExpenseCategory() { Id = 4, Name = "Mercado", BackColor = new SolidColorBrush(Colors.LightGray), });
+            categories.Add(new ExpenseCategory() { Id = 5, Name = "Feira", BackColor = new SolidColorBrush(Colors.LightCoral), });
+            categories.Add(new ExpenseCategory() { Id = 6, Name = "Moradia", Image = new BitmapImage(new Uri(baseUri, "Images/log_cabin-48.png")), BackColor = new SolidColorBrush(Colors.LightPink), });
             categoriesListView.ItemsSource = categories;
+            categoriesListView.SelectedIndex = 0;
         }
 
         private void OnWindowActivated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
@@ -103,6 +112,39 @@ namespace ExpenseController.UI
                 Canvas.SetLeft(addExpensePopUp, Window.Current.Bounds.Width + 10);
             }
             catch { }
+        }
+
+        private void saveExpenseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var expense = new Expense()
+            {
+                Category = (ExpenseCategory)categoriesListView.SelectedItem,
+                Description = descriptionTextBox.Text,
+            };
+            decimal value;
+            expense.Value = decimal.TryParse(valueTextBox.Text, out value) ? value : 0;
+            DateTime date;
+            expense.Date = DateTime.TryParse(expenseDatePicker.Text, out date) ? date : DateTime.Now;
+
+            expenseDao.Save(expense);
+
+            if (addExpensePopUp.IsOpen)
+                addExpensePopUp.IsOpen = false;
+        }
+
+        private void descriptionTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            descriptionTextBox.Foreground = new SolidColorBrush(Colors.Black);
+            descriptionTextBox.Text = string.Empty;
+        }
+
+        private void descriptionTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(descriptionTextBox.Text))
+            {
+                descriptionTextBox.Foreground = new SolidColorBrush(Colors.LightGray);
+                descriptionTextBox.Text = "Descrição";
+            }
         }
     }
 }

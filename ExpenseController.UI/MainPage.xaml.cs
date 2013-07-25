@@ -30,6 +30,16 @@ namespace ExpenseController.UI
         {
             this.InitializeComponent();
             SettingsPane.GetForCurrentView().CommandsRequested += Settings_CommandsRequested;
+
+
+            //Tile Example run
+            TileControl tc = TileControl.GetInstance();
+            tc.ClearTiles();
+            tc.AddTotalExpenseTile("R$ 500.00");
+            string[] expenses = { "test", "test2" };
+            string[] expenses2 = { "test3", "test4" };
+            tc.AddExpense("TileWideImageAndText02", expenses, "Images\\WideSaveMoney.jpg", "TileSquarePeekImageAndText04", expenses, "Images\\SquareSaveMoney.jpg");
+            tc.AddExpense("TileWideImageAndText02", expenses2, "Images\\WideSaveMoneyCalculator.jpg", "TileSquarePeekImageAndText04", expenses2, "Images\\SquareSaveMoney.jpg");
         }
 
         /// <summary>

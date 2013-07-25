@@ -120,6 +120,7 @@
     <Compile Include="Model\Expense.cs" />
     <Compile Include="Model\ExpenseCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tile\TileControl.cs" />
     <Compile Include="ViewData\CategoryExpenseViewData.cs" />
     <Compile Include="ViewData\ExpenseViewData.cs" />
   </ItemGroup>
@@ -135,9 +136,13 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Images\30x30.jpg" />
     <Content Include="Images\apartment-48.png" />
     <Content Include="Images\bus-48.png" />
     <Content Include="Images\log_cabin-48.png" />
+    <Content Include="Images\SquareSaveMoney.jpg" />
+    <Content Include="Images\WideSaveMoney.jpg" />
+    <Content Include="Images\WideSaveMoneyCalculator.jpg" />
     <Page Include="Common\Templates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
